@@ -1,7 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import { Message } from './components/message';
+import { Counter } from './components/counter';
+
+const myText = 'dog eat frog';
 
 function App() {
+  const clickInDog = () => {
+    console.log('Вы тыкнули на текст');
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +25,11 @@ function App() {
         >
           Learn React
         </a>
+        <Message 
+        text={myText} 
+        click={clickInDog}
+        />
+        <Counter />
       </header>
     </div>
   );
