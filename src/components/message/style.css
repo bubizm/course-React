@@ -1,7 +1,7 @@
 .header {
-    color: red;
-    margin-top: 20px;
-    border: 2px solid yellow;
-    padding: 10px;
-    background-color: aquamarine;
+    color: black;
+    font-size: 20px;
+    padding: 5px;
+    margin: 0 auto;
+    word-wrap: break-word;
 }

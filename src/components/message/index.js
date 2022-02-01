@@ -1,7 +1,7 @@
 import './style.css';
 
-export const Message = ({ text, click }) => {
+export const Message = ({ message, author }) => {
     return (
-    <h3 className='header' onClick={ click }>This is message, { text }</h3>
+      <h3 className='header'>{ author }: { message }</h3>
     );
 };
