@@ -1,9 +1,10 @@
 import './style.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const Form = ({ onSubmit }) => {
 
     const [value, setValue] = useState("");
+    const inputFocus = useRef();
 
     const handleChange = (event) => {
         setValue(event.target.value)
@@ -15,6 +16,9 @@ export const Form = ({ onSubmit }) => {
         setValue("");
     }
 
+    useEffect(() => {
+        inputFocus.current?.focus();
+    })
 
     return (
         <>
@@ -22,7 +26,12 @@ export const Form = ({ onSubmit }) => {
 
         <form onSubmit={ handleSubmit }>
         <label htmlFor="message">Input your text: </label>
-        <input value={ value } onChange={ handleChange } className='formText' type="text" id="message" name="message" />
+        <input 
+        ref={ inputFocus }
+        value={ value } 
+        onChange={ handleChange } 
+        className='formText' 
+        type="text" id="message" name="message" />
         <br/>
         <input type="submit" value="Submit" />
         </form>

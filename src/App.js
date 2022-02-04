@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
-// import { Counter } from './components/counter';
-import { Form } from './components/form';
-import { AUTHORS } from './components/utils/constants';
-import { MessageList } from './components/messageList';
+import { Form } from './components/Form';
+import { AUTHORS } from './components/Utils/constants';
+import { MessageList } from './components/MessageList';
+import { FormMui } from './components/FormMUI';
+import { Chatlist } from './components/ChatsList';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     const newMsg = {
       text,
       author,
+      id: `msg-${Date.now()}`,
     }
     setMessageList((prevMessageList) => [...prevMessageList, newMsg]);
   }
@@ -37,9 +39,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <MessageList messages={ messageList }/>
-        <Form onSubmit={ handleAddMessage }/>
-        
+        <Chatlist />
+        <MessageList messages={ messageList } />
+        <Form onSubmit={ handleAddMessage } />
+        {/* <FormMui onSubmit={ handleAddMessage } /> ПОЧЕМУ-ТО НЕ РАБОТАЕТ*/}
       </header>
     </div>
   );
