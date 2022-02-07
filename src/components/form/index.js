@@ -8,21 +8,21 @@ export const Form = ({ onSubmit }) => {
 
     const handleChange = (event) => {
         setValue(event.target.value)
-    }
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         onSubmit(value);
         setValue("");
-    }
+    };
 
     useEffect(() => {
         inputFocus.current?.focus();
-    })
+    });
 
     return (
         <>
-        <h1>Messenger</h1>
+        <h2 className='header-text'>Messenger</h2>
 
         <form onSubmit={ handleSubmit }>
         <label htmlFor="message">Input your text: </label>

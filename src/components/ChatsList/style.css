@@ -9,3 +9,12 @@
 .chats-list {
     padding: 0 10px;
 }
+
+.chatlist {
+    list-style-type: none;
+}
+
+.chatlist-header {
+    margin: 0;
+    margin-top: 5px;
+}

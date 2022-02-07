@@ -1,8 +1,11 @@
-.chatlist {
-    list-style-type: none;
+.App {
+    text-align: center;
 }
 
-.chatlist-header {
-    margin: 0;
-    margin-top: 5px;
+.App-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
 }
