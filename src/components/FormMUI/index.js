@@ -22,7 +22,7 @@ export const FormMui = ({ onSubmit }) => {
     })
 
     return (
-        <form onSubmit={ handleSubmit }>
+        <form className='form-chat' onSubmit={ handleSubmit }>
             <TextField
             value={ value }
             ref={ inputFocus }
@@ -34,6 +34,7 @@ export const FormMui = ({ onSubmit }) => {
             maxRows={4}
             />
             <Button
+            type='submit'
             className='button-form' 
             variant="contained"
             >

@@ -22,3 +22,8 @@
 .button-form.MuiButton-root {
     margin-top: 10px;
 }
+
+.form-chat {
+    display: flex;
+    flex-direction: column;
+}

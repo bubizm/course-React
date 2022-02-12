@@ -52,8 +52,6 @@ export function Chat() {
         })
     }, [messageList]);
 
-    console.log(messageList);
-
     if (!messageList[chatId]) {
         return <Navigate to='/chats' replace />
     }
@@ -62,8 +60,8 @@ export function Chat() {
         <div className="App">
         <header className="App-header">
             <MessageList messages={ messageList[chatId] } />
-            <Form onSubmit={ handleAddMessage } />
-            {/* <FormMui onSubmit={ handleAddMessage } /> ПОЧЕМУ-ТО НЕ РАБОТАЕТ*/}
+            {/* <Form onSubmit={ handleAddMessage } /> */}
+            <FormMui onSubmit={ handleAddMessage } />
         </header>
         </div>
     );
