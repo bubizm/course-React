@@ -8,61 +8,49 @@ import { Chatlist } from '../../components/ChatsList';
 import './style.css';
 import { Navigate, useParams } from 'react-router-dom';
 
-const chats = [{id: 'chat1'}];
-const messages = {
-    chat1: [],
-}
+export function Chat({ messages, addMessage }) {
+  const params = useParams();
+  const { chatId } = params;
 
-export function Chat() {
-    const params = useParams();
-    const { chatId } = params;
+  const sendMessage = (text, author) => {
+    const newMsg = {
+      text,
+      author,
+      id: `msg-${Date.now()}`,
+    };
+    addMessage(chatId, newMsg);
+  };
 
-    const [messageList, setMessageList] = useState({
-        chat1: [],
-        chat2: [],
-        chat3: [],
-    });
+  const handleAddMessage = (text) => {
+    sendMessage(text, AUTHORS.me);
+  };
 
-    const sendMessage = (text, author) => {
-        const newMsg = {
-        text,
-        author,
-        id: `msg-${Date.now()}`,
-        }
-        setMessageList((prevMessageList) => ({
-            ...prevMessageList,
-            [chatId]: [...prevMessageList[chatId], newMsg]}));
+  useEffect(() => {
+    let timeout;
+    if (
+      messages[chatId]?.[messages[chatId]?.length - 1]?.author === AUTHORS.me
+    ) {
+      timeout = setTimeout(() => {
+        sendMessage('Are you OK!?', AUTHORS.robot);
+      }, 1000);
     }
 
-    const handleAddMessage = (text) => {
-        sendMessage(text, AUTHORS.me);
-    }
-    
-    useEffect(() => {
-        let timeout; 
-        if (messageList[chatId][messageList[chatId].length - 1]?.author ===
-             AUTHORS.me) {
-        timeout = setTimeout(() => {
-            sendMessage('Are you OK!?', AUTHORS.robot);
-        },1000);
-        }
-        
-        return (() => {
-        clearTimeout(timeout);
-        })
-    }, [messageList]);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [messages]);
 
-    if (!messageList[chatId]) {
-        return <Navigate to='/chats' replace />
-    }
+  if (!messages[chatId]) {
+    return <Navigate to='/chats' replace />;
+  }
 
-    return (
-        <div className="App">
-        <header className="App-header">
-            <MessageList messages={ messageList[chatId] } />
-            {/* <Form onSubmit={ handleAddMessage } /> */}
-            <FormMui onSubmit={ handleAddMessage } />
-        </header>
-        </div>
-    );
+  return (
+    <div className='App'>
+      <header className='App-header'>
+        <MessageList messages={messages[chatId]} />
+        {/* <Form onSubmit={ handleAddMessage } /> */}
+        <FormMui onSubmit={handleAddMessage} />
+      </header>
+    </div>
+  );
 }
