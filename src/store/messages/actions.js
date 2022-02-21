@@ -1,11 +1,18 @@
-export const add_messages = 'messages::add_messages';
-export const delete_messages = 'messages::delete_messages';
+export const add_message = 'messages::add_message';
+export const delete_message = 'messages::delete_message';
 
-export const changeShowName = {
-  type: change_show_name,
-};
+export const addMessage = (chatId, newMsg) => ({
+  type: add_message,
+  payload: {
+    chatId,
+    newMsg,
+  },
+});
 
-export const changeName = (name) => ({
-  type: change_name,
-  payload: name,
+export const deleteMessage = ({ chatId, msgId }) => ({
+  type: delete_message,
+  payload: {
+    chatId,
+    msgId,
+  },
 });

@@ -3,12 +3,11 @@ import { Form } from '../../components/Form';
 import { AUTHORS } from '../../components/Utils/constants';
 import { MessageList } from '../../components/MessageList';
 import { FormMui } from '../../components/FormMUI';
-import { Chatlist } from '../../components/ChatsList';
 
 import './style.css';
 import { Navigate, useParams } from 'react-router-dom';
 
-export function Chat({ messages, addMessage }) {
+export function Chat({ messages, addMessage, deleteMessage }) {
   const params = useParams();
   const { chatId } = params;
 

@@ -5,3 +5,10 @@
     margin: 0 auto;
     word-wrap: break-word;
 }
+
+.msg {
+    display: flex;
+    flex-direction: row;
+    padding: auto;
+    align-items: center;
+}

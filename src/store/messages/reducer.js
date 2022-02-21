@@ -1,30 +1,41 @@
-import { change_name, change_register, change_show_name } from './actions';
+import { add_chat, delete_chat } from '../chats/actions';
+import {
+  addMessage,
+  add_message,
+  deleteMessage,
+  delete_message,
+} from './actions';
 
-const initialState = {
-  name: 'Vlad',
-  showName: false,
-  checked: false,
-};
+const initialState = {};
 
 export const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case change_show_name: {
+    case add_message: {
       return {
         ...state,
-        showName: !state.showName,
+        [action.payload.chatId]: [
+          ...state[action.payload.chatId],
+          action.payload.newMsg,
+        ],
       };
     }
-    case change_name: {
+    case add_chat: {
       return {
         ...state,
-        name: action.payload,
+        [action.payload.id]: [],
       };
     }
-    case change_register: {
+    case delete_chat: {
+      const newMsgs = { ...state };
+      delete newMsgs[action.payload];
+      return newMsgs;
+    }
+    case delete_message: {
       return {
-        ...state,
-        name: action.payload,
-        checked: !state.checked,
+        [action.payload.chatId]: [
+          ...state[action.payload.chatId],
+          action.payload.newMsg,
+        ],
       };
     }
     default:
