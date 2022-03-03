@@ -4,6 +4,7 @@ import {
   add_message,
   deleteMessage,
   delete_message,
+  edit_message,
 } from './actions';
 
 const initialState = {};
@@ -27,16 +28,30 @@ export const messagesReducer = (state = initialState, action) => {
     }
     case delete_chat: {
       const newMsgs = { ...state };
-      delete newMsgs[action.payload];
+      delete newMsgs[action.payload.id];
       return newMsgs;
     }
     case delete_message: {
       return {
-        [action.payload.chatId]: [
-          ...state[action.payload.chatId],
-          action.payload.newMsg,
-        ],
+        ...state,
+        [action.payload.chatId]: state[action.payload.chatId].filter(
+          (message) => message.id !== action.payload.msgId
+        ),
       };
+    }
+    case edit_message: {
+      const { chatId, msgId, newText } = action.payload;
+      const editIndex = state[chatId].findIndex(
+        (message) => message.id === msgId
+      );
+
+      const newState = { ...state };
+      // console.log(newState[chatId][editIndex]);
+      newState[chatId][editIndex] = {
+        ...newState[chatId][editIndex],
+        text: newText,
+      };
+      return newState;
     }
     default:
       return state;

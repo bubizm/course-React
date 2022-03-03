@@ -28,7 +28,7 @@ export const AddChat = ({ onSubmit, del }) => {
         name='nameChat'
       />
       <br />
-      <input type='submit' value='Submit' />
+      <input type='submit' value='Отправить' />
     </form>
   );
 };

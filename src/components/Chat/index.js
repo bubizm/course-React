@@ -6,10 +6,17 @@ import { FormMui } from '../../components/FormMUI';
 
 import './style.css';
 import { Navigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectMessages } from '../../store/messages/selectors';
+import { addMessage, addMessageWithThunk } from '../../store/messages/actions';
 
-export function Chat({ messages, addMessage, deleteMessage }) {
+// export function Chat({ messages, addMessage, deleteMessage }) {
+export function Chat() {
   const params = useParams();
   const { chatId } = params;
+
+  const dispatch = useDispatch();
+  const messages = useSelector(selectMessages);
 
   const sendMessage = (text, author) => {
     const newMsg = {
@@ -17,27 +24,27 @@ export function Chat({ messages, addMessage, deleteMessage }) {
       author,
       id: `msg-${Date.now()}`,
     };
-    addMessage(chatId, newMsg);
+    dispatch(addMessageWithThunk(chatId, newMsg));
   };
 
   const handleAddMessage = (text) => {
     sendMessage(text, AUTHORS.me);
   };
 
-  useEffect(() => {
-    let timeout;
-    if (
-      messages[chatId]?.[messages[chatId]?.length - 1]?.author === AUTHORS.me
-    ) {
-      timeout = setTimeout(() => {
-        sendMessage('Are you OK!?', AUTHORS.robot);
-      }, 1000);
-    }
+  // useEffect(() => {
+  //   let timeout;
+  //   if (
+  //     messages[chatId]?.[messages[chatId]?.length - 1]?.author === AUTHORS.me
+  //   ) {
+  //     timeout = setTimeout(() => {
+  //       sendMessage('Are you OK!?', AUTHORS.robot);
+  //     }, 1000);
+  //   }
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [messages]);
+  //   return () => {
+  //     clearTimeout(timeout);
+  //   };
+  // }, [messages]);
 
   if (!messages[chatId]) {
     return <Navigate to='/chats' replace />;

@@ -7,17 +7,19 @@ export const MessageList = ({ messages }) => {
 
   useEffect(() => {
     messagesEnd.current?.scrollIntoView();
-  },[messages]);
+  }, [messages]);
 
-    return (
-      <div className='modal'>
-        {messages.map((message) => (
-        <Message 
-        key={ message.id } 
-        author={ message.author } 
-        message={ message.text } 
-        />))}
-        <div ref={messagesEnd} />
-      </div>
-    );
+  return (
+    <div className='modal'>
+      {messages.map((message) => (
+        <Message
+          key={message.id}
+          msgId={message.id}
+          author={message.author}
+          message={message.text}
+        />
+      ))}
+      <div ref={messagesEnd} />
+    </div>
+  );
 };

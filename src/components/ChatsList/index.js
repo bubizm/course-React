@@ -1,11 +1,34 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Outlet } from 'react-router-dom';
+import { addChat, deleteChat } from '../../store/chats/actions';
+import { selectChats } from '../../store/chats/selectors';
 import { AddChat } from '../AddChat';
 import { Chat } from '../Chat';
 import { DeleteButton } from '../DeleteChat';
 import './style.css';
 
-export const Chatlist = ({ chats, onAddChat, onDeleteChat }) => {
+export const Chatlist = () => {
+  const chats = useSelector(selectChats);
+  const chatList = useSelector(selectChats);
+  const dispatch = useDispatch();
+
+  const addChatInChatlist = (name) => {
+    const chat = {
+      name,
+      id: chatList[chatList.length - 1]
+        ? chatList[chatList.length - 1].id + 1
+        : 1,
+    };
+
+    dispatch(addChat(chat.name, chat.id));
+    // setChatList((chatList) => [...chatList, chat]);
+    // setMessages((prevMessages) => ({
+    //   ...prevMessages,
+    //   [chat.id]: [],
+    // }));
+  };
+
   // const addChatInChatlist = (name) => {
   //   const chat = {
   //     name,
@@ -19,9 +42,9 @@ export const Chatlist = ({ chats, onAddChat, onDeleteChat }) => {
   //   addChatInChatlist(name);
   // };
 
-  const handleDeleteChat = (id) => {
-    onDeleteChat(id);
-  };
+  // const handleDeleteChat = (id) => {
+  //   onDeleteChat(id);
+  // };
 
   return (
     <>
@@ -38,11 +61,12 @@ export const Chatlist = ({ chats, onAddChat, onDeleteChat }) => {
               >
                 {chat.name}
               </NavLink>
-              <DeleteButton del={handleDeleteChat} id={chat.id} />
+              {/* <DeleteButton del={handleDeleteChat} id={chat.id} /> */}
+              <DeleteButton id={chat.id} />
             </li>
           ))}
         </ul>
-        <AddChat onSubmit={onAddChat} />
+        <AddChat onSubmit={addChatInChatlist} />
       </div>
       <Outlet />
     </>

@@ -1,10 +1,4 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
-import { addChat, deleteChat } from '../../store/chats/actions';
-import { selectChats } from '../../store/chats/selectors';
-import { addMessage, deleteMessage } from '../../store/messages/actions';
-import { selectMessages } from '../../store/messages/selectors';
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
 import { Chat } from '../Chat';
 import { Chatlist } from '../ChatsList';
 import { Profile } from '../Profile';
@@ -36,52 +30,22 @@ const Home = () => <h2>Home page</h2>;
 export const Router = () => {
   // const [chatList, setChatList] = useState(initialChats);
   // const [messages, setMessages] = useState(initialMessages);
-  const messages = useSelector(selectMessages);
 
-  const chatList = useSelector(selectChats);
+  // const messages = useSelector(selectMessages);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handleAddMessage = (chatId, newMsg) => {
-    // setMessages((prevMessages) => ({
-    //   ...prevMessages,
-    //   [chatId]: [...prevMessages[chatId], newMsg],
-    // }));
-    dispatch(addMessage(chatId, newMsg));
-  };
+  // const handleAddMessage = (chatId, newMsg) => {
+  //   // setMessages((prevMessages) => ({
+  //   //   ...prevMessages,
+  //   //   [chatId]: [...prevMessages[chatId], newMsg],
+  //   // }));
+  //   dispatch(addMessage(chatId, newMsg));
+  // };
 
-  const addChatInChatlist = (name) => {
-    const chat = {
-      name,
-      id: chatList[chatList.length - 1]
-        ? chatList[chatList.length - 1].id + 1
-        : 1,
-    };
-
-    dispatch(addChat(chat.name, chat.id));
-    // setChatList((chatList) => [...chatList, chat]);
-    // setMessages((prevMessages) => ({
-    //   ...prevMessages,
-    //   [chat.id]: [],
-    // }));
-  };
-
-  const handleDeleteChat = (chatId) => {
-    dispatch(deleteChat(chatId));
-    // setChatList((prevChatList) =>
-    //   prevChatList.filter((chat) => chat.id !== chatId)
-    // );
-    // setMessages((prevMessages) => {
-    //   const newMessages = { ...prevMessages };
-
-    //   delete newMessages[chatId];
-    //   return newMessages;
-    // });
-  };
-
-  const handleDeleteMessage = (chatId, msgId) => {
-    dispatch(deleteMessage(chatId, msgId));
-  };
+  // const handleDeleteMessage = (chatId, msgId) => {
+  //   dispatch(deleteMessage(chatId, msgId));
+  // };
 
   return (
     <BrowserRouter>
@@ -118,23 +82,14 @@ export const Router = () => {
         </div>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route
-            path='chats'
-            element={
-              <Chatlist
-                chats={chatList}
-                onAddChat={addChatInChatlist}
-                onDeleteChat={handleDeleteChat}
-              />
-            }
-          >
+          <Route path='chats' element={<Chatlist />}>
             <Route
               path='chat:chatId'
               element={
                 <Chat
-                  messages={messages}
-                  addMessage={handleAddMessage}
-                  deleteMessage={handleDeleteMessage}
+                // messages={messages}
+                // addMessage={handleAddMessage}
+                // deleteMessage={handleDeleteMessage}
                 />
               }
             />
