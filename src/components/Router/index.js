@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
+import { Articles } from '../Articles';
 import { Chat } from '../Chat';
 import { Chatlist } from '../ChatsList';
 import { Profile } from '../Profile';
@@ -80,8 +81,19 @@ export const Router = () => {
             Profile
           </NavLink>
         </div>
+        <div>
+          <NavLink
+            to='/articles'
+            style={({ isActive }) => ({
+              color: isActive ? 'lightgreen' : 'yellow',
+            })}
+          >
+            Articles
+          </NavLink>
+        </div>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='articles' element={<Articles />} />
           <Route path='chats' element={<Chatlist />}>
             <Route
               path='chat:chatId'
