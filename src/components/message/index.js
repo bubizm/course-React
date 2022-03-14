@@ -8,13 +8,16 @@ import {
 } from '../../store/messages/actions';
 import { useParams } from 'react-router-dom';
 import { Form } from '../Form';
+import { remove } from 'firebase/database';
+import { getMessagesRefById } from '../../services/firebase';
 
 export const Message = ({ msgId, message, author }) => {
   const dispatch = useDispatch();
   const { chatId } = useParams();
 
   const handleDelete = (id) => {
-    dispatch(deleteMessage(chatId, id));
+    // dispatch(deleteMessage(chatId, id));
+    remove(getMessagesRefById(chatId, id));
   };
 
   const handleEdit = (id) => {

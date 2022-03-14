@@ -1,3 +1,7 @@
+import { onChildAdded, onChildRemoved } from 'firebase/database';
+import { useDispatch } from 'react-redux';
+import { chatsRef } from '../../services/firebase';
+
 export const add_chat = 'chats::add_chat';
 export const delete_chat = 'chats::delete_chat';
 
@@ -13,3 +17,14 @@ export const addChat = (name, id) => ({
     id,
   },
 });
+
+// export const initChatsTracking = () => (dispatch) => {
+//   onChildAdded(chatsRef, (snapshot) => {
+//     console.log(snapshot.val());
+//     dispatch(addChat(snapshot.val().name, snapshot.val().id));
+//   });
+
+//   onChildRemoved(chatsRef, (snapshot) => {
+//     dispatch(deleteChat(snapshot.val()?.id));
+//   });
+// };

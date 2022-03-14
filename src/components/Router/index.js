@@ -1,52 +1,31 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+
 import { Articles } from '../Articles';
 import { Chat } from '../Chat';
 import { Chatlist } from '../ChatsList';
+import { Home } from '../Home/Home';
+import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
 import { Profile } from '../Profile';
+import { PublicRoute } from '../PublicRoute/PublicRoute';
 
 import './style.css';
-
-const Home = () => <h2>Home page</h2>;
-
-// const initialChats = [
-//   {
-//     name: 'chat1',
-//     id: 1,
-//   },
-//   {
-//     name: 'chat2',
-//     id: 2,
-//   },
-//   {
-//     name: 'chat3',
-//     id: 3,
-//   },
-// ];
-
-// const initialMessages = initialChats.reduce((acc, el) => {
-//   acc[el.id] = [];
-//   return acc;
-// }, {});
+import { auth } from '../../services/firebase';
 
 export const Router = () => {
-  // const [chatList, setChatList] = useState(initialChats);
-  // const [messages, setMessages] = useState(initialMessages);
+  const [authed, setAuthed] = useState(false);
 
-  // const messages = useSelector(selectMessages);
-
-  // const dispatch = useDispatch();
-
-  // const handleAddMessage = (chatId, newMsg) => {
-  //   // setMessages((prevMessages) => ({
-  //   //   ...prevMessages,
-  //   //   [chatId]: [...prevMessages[chatId], newMsg],
-  //   // }));
-  //   dispatch(addMessage(chatId, newMsg));
-  // };
-
-  // const handleDeleteMessage = (chatId, msgId) => {
-  //   dispatch(deleteMessage(chatId, msgId));
-  // };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthed(true);
+      } else {
+        setAuthed(false);
+      }
+      return unsubscribe;
+    });
+  }, []);
 
   return (
     <BrowserRouter>
@@ -92,22 +71,29 @@ export const Router = () => {
           </NavLink>
         </div>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='' element={<PublicRoute authed={authed} />}>
+            <Route path='/' element={<Home />} />
+            <Route path='/signup' element={<Home isSignUp />} />
+          </Route>
+          <Route path='profile' element={<PrivateRoute authed={authed} />}>
+            <Route path='' element={<Profile />} />
+          </Route>
           <Route path='articles' element={<Articles />} />
-          <Route path='chats' element={<Chatlist />}>
-            <Route
-              path='chat:chatId'
-              element={
-                <Chat
-                // messages={messages}
-                // addMessage={handleAddMessage}
-                // deleteMessage={handleDeleteMessage}
-                />
-              }
-            />
+          <Route path='chats' element={<PrivateRoute authed={authed} />}>
+            <Route path='' element={<Chatlist />}>
+              <Route
+                path='chat:chatId'
+                element={
+                  <Chat
+                  // messages={messages}
+                  // addMessage={handleAddMessage}
+                  // deleteMessage={handleDeleteMessage}
+                  />
+                }
+              />
+            </Route>
           </Route>
           <Route path='*' element={<h2>404 not found</h2>} />
-          <Route path='profile' element={<Profile />} />
         </Routes>
       </div>
     </BrowserRouter>
