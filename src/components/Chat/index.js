@@ -46,13 +46,16 @@ export function Chat() {
     set(getMessagesRefById(chatId, newMsg.id), newMsg);
   };
 
+  // useEffect(() => {
+  //   const unsubscribe = onValue(getMessagesRefByChatId(chatId), (snapshot) => {
+  //     if (!snapshot.val()?.empty) {
+  //       setMessages(null);
+  //     }
+  //   });
+  //   return unsubscribe;
+  // }, [chatId]);
   useEffect(() => {
-    const unsubscribe = onValue(getMessagesRefByChatId(chatId), (snapshot) => {
-      if (!snapshot.val()?.empty) {
-        setMessages(null);
-      }
-    });
-    return unsubscribe;
+    setMessages([]);
   }, [chatId]);
 
   useEffect(() => {

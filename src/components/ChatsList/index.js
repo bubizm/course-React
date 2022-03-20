@@ -20,8 +20,8 @@ import { DeleteButton } from '../DeleteChat';
 import './style.css';
 
 export const Chatlist = () => {
-  // const chats = useSelector(selectChats);
-  const [chats, setChats] = useState([]);
+  const chats = useSelector(selectChats);
+  // const [chats, setChats] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -36,21 +36,21 @@ export const Chatlist = () => {
   //   return () => unsubscribe;
   // }, []);
 
-  useEffect(() => {
-    const unsubscribe = onChildAdded(chatsRef, (snapshot) => {
-      setChats((prevChats) => [...prevChats, snapshot.val()]);
-    });
-    return unsubscribe;
-  }, []);
+  // useEffect(() => {
+  //   const unsubscribe = onChildAdded(chatsRef, (snapshot) => {
+  //     setChats((prevChats) => [...prevChats, snapshot.val()]);
+  //   });
+  //   return unsubscribe;
+  // }, []);
 
-  useEffect(() => {
-    const unsubscribe = onChildRemoved(chatsRef, (snapshot) => {
-      setChats((prevChats) =>
-        prevChats.filter(({ id }) => id !== snapshot.val()?.id)
-      );
-    });
-    return unsubscribe;
-  }, []);
+  // useEffect(() => {
+  //   const unsubscribe = onChildRemoved(chatsRef, (snapshot) => {
+  //     setChats((prevChats) =>
+  //       prevChats.filter(({ id }) => id !== snapshot.val()?.id)
+  //     );
+  //   });
+  //   return unsubscribe;
+  // }, []);
 
   // useEffect(() => {
   //   dispatch(initChatsTracking());
@@ -80,7 +80,7 @@ export const Chatlist = () => {
   //     id: chats[chats.length - 1].id + 1,
   //   };
 
-  //   // setChat((prevInitialChats) => [...prevInitialChats, chat]);
+  //   setChats((prevInitialChats) => [...prevInitialChats, chat]);
   // };
 
   // const handleAddChat = (name) => {

@@ -29,7 +29,7 @@ export const getArticles = () => async (dispatch) => {
     const result = await response.json();
     dispatch(getArticlesSuccess(result));
   } catch (err) {
-    dispatch(getArticlesFailure(true));
+    dispatch(getArticlesFailure(err));
     console.warn(err);
   }
 };

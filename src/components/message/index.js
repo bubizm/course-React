@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 import { Form } from '../Form';
 import { remove } from 'firebase/database';
 import { getMessagesRefById } from '../../services/firebase';
+import { MessagePresentation } from '../MessagePresentation';
 
 export const Message = ({ msgId, message, author }) => {
   const dispatch = useDispatch();
@@ -40,9 +41,10 @@ export const Message = ({ msgId, message, author }) => {
   return (
     <div className='msg'>
       <button onClick={() => handleEdit(msgId)}>Edit</button>
-      <h3 className='header'>
+      {/* <h3 className='header'>
         {author}: {message}
-      </h3>
+      </h3> */}
+      <MessagePresentation author={author} message={message} />
       <button onClick={() => handleDelete(msgId)}>X</button>
     </div>
   );
