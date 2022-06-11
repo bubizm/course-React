@@ -1,0 +1,29 @@
+.textField.MuiFormControl-root {
+    margin-top: 15px;
+}
+
+.color .MuiOutlinedInput-input {
+    color: blue;
+}
+
+.coloryet .css-1sumxir-MuiFormLabel-root-MuiInputLabel-root {
+    color: beige;
+}
+
+.color-line .MuiOutlinedInput-notchedOutline {
+    border-color: beige;
+}
+
+.coloryet .css-dpjnhs-MuiInputBase-root-MuiOutlinedInput-root {
+    background-color: white;
+    opacity: 0.3;
+}
+
+.button-form.MuiButton-root {
+    margin-top: 10px;
+}
+
+.form-chat {
+    display: flex;
+    flex-direction: column;
+}

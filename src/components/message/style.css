@@ -1,0 +1,14 @@
+.header {
+    color: black;
+    font-size: 20px;
+    padding: 5px;
+    margin: 0 auto;
+    word-wrap: break-word;
+}
+
+.msg {
+    display: flex;
+    flex-direction: row;
+    padding: auto;
+    align-items: center;
+}
