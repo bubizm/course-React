@@ -17,14 +17,3 @@ export const addChat = (name, id) => ({
     id,
   },
 });
-
-// export const initChatsTracking = () => (dispatch) => {
-//   onChildAdded(chatsRef, (snapshot) => {
-//     console.log(snapshot.val());
-//     dispatch(addChat(snapshot.val().name, snapshot.val().id));
-//   });
-
-//   onChildRemoved(chatsRef, (snapshot) => {
-//     dispatch(deleteChat(snapshot.val()?.id));
-//   });
-// };
