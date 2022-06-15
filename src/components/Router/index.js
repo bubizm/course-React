@@ -85,9 +85,6 @@ export const Router = () => {
                 path='chat:chatId'
                 element={
                   <Chat
-                  // messages={messages}
-                  // addMessage={handleAddMessage}
-                  // deleteMessage={handleDeleteMessage}
                   />
                 }
               />
