@@ -22,13 +22,10 @@ import {
   getMessagesRefById,
 } from '../../services/firebase';
 
-// export function Chat({ messages, addMessage, deleteMessage }) {
 export function Chat() {
   const params = useParams();
   const { chatId } = params;
 
-  // const dispatch = useDispatch();
-  // const messages = useSelector(selectMessages);
   const [messages, setMessages] = useState([]);
 
   const handleAddMessage = (text) => {
@@ -41,19 +38,9 @@ export function Chat() {
       author,
       id: `msg-${Date.now()}`,
     };
-    // dispatch(addMessageWithThunk(chatId, newMsg));
-    // push(getMessagesRefByChatId(chatId), newMsg);
     set(getMessagesRefById(chatId, newMsg.id), newMsg);
   };
 
-  // useEffect(() => {
-  //   const unsubscribe = onValue(getMessagesRefByChatId(chatId), (snapshot) => {
-  //     if (!snapshot.val()?.empty) {
-  //       setMessages(null);
-  //     }
-  //   });
-  //   return unsubscribe;
-  // }, [chatId]);
   useEffect(() => {
     setMessages([]);
   }, [chatId]);
@@ -79,23 +66,6 @@ export function Chat() {
     );
     return unsubscribe;
   }, [chatId]);
-
-  // useEffect(() => {
-  //   let timeout;
-  //   if (
-  //     messages[chatId]?.[messages[chatId]?.length - 1]?.author === AUTHORS.me
-  //   ) {
-  //     timeout = setTimeout(() => {
-  //       sendMessage('Are you OK!?', AUTHORS.robot);
-  //     }, 1000);
-  //   }
-
-  //   return () => {
-  //     clearTimeout(timeout);
-  //   };
-  // }, [messages]);
-
-  // if (!messages[chatId]) {
   if (!messages) {
     return <Navigate to='/chats' replace />;
   }
