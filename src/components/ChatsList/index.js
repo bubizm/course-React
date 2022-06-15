@@ -25,37 +25,6 @@ export const Chatlist = () => {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const unsubscribe = onValue(chatsRef, (snapshot) => {
-  //     const newChats = [];
-  //     snapshot.forEach((child) => {
-  //       newChats.push(child.val());
-  //     });
-  //     setChats(newChats);
-  //   });
-  //   return () => unsubscribe;
-  // }, []);
-
-  // useEffect(() => {
-  //   const unsubscribe = onChildAdded(chatsRef, (snapshot) => {
-  //     setChats((prevChats) => [...prevChats, snapshot.val()]);
-  //   });
-  //   return unsubscribe;
-  // }, []);
-
-  // useEffect(() => {
-  //   const unsubscribe = onChildRemoved(chatsRef, (snapshot) => {
-  //     setChats((prevChats) =>
-  //       prevChats.filter(({ id }) => id !== snapshot.val()?.id)
-  //     );
-  //   });
-  //   return unsubscribe;
-  // }, []);
-
-  // useEffect(() => {
-  //   dispatch(initChatsTracking());
-  // }, []);
-
   const addChatInChatlist = (name) => {
     const chat = {
       name,
@@ -67,29 +36,7 @@ export const Chatlist = () => {
     set(getChatsRefById(chat.id), { id: chat.id, name: name });
     set(getMessagesRefByChatId(chat.id), { empty: true });
 
-    // setChatList((chatList) => [...chatList, chat]);
-    // setMessages((prevMessages) => ({
-    //   ...prevMessages,
-    //   [chat.id]: [],
-    // }));
   };
-
-  // const addChatInChatlist = (name) => {
-  //   const chat = {
-  //     name,
-  //     id: chats[chats.length - 1].id + 1,
-  //   };
-
-  //   setChats((prevInitialChats) => [...prevInitialChats, chat]);
-  // };
-
-  // const handleAddChat = (name) => {
-  //   addChatInChatlist(name);
-  // };
-
-  // const handleDeleteChat = (id) => {
-  //   onDeleteChat(id);
-  // };
 
   return (
     <>
