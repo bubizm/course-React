@@ -23,28 +23,18 @@ import { Form } from '../Form';
 import './style.css';
 
 export const Profile = () => {
-  // const storeState = store.getState();
-  // console.log(storeState);
-  // Функционал тот же что и ниже, только это для редакса,
-  // а внизу для реакт-редакса
 
   const dispatch = useDispatch();
-  //   const data = useSelector((state) => state);
-  // const showName = useSelector(selectShowName, shallowEqual);
-  // const name = useSelector(selectName, shallowEqual);
-  // const checked = useSelector(selectChecked, shallowEqual);
 
   const [name, setName] = useState('');
   const [showName, setShowName] = useState(false);
   const [checked, setChecked] = useState(false);
 
   const handleChangeShowName = () => {
-    // dispatch(changeShowName);
     set(profileShowNameRef, !showName);
   };
 
   const handleChangeName = (text) => {
-    // dispatch(changeName(text));
     set(profileNameRef, text);
   };
 
@@ -77,11 +67,6 @@ export const Profile = () => {
 
     set(profileCheckedRef, active);
     set(profileNameRef, active);
-
-    // dispatch({
-    //   type: change_register,
-    //   payload: active,
-    // });
   };
 
   const handleLogout = async () => {
