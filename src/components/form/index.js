@@ -21,8 +21,6 @@ export const Form = ({ onSubmit }) => {
 
   return (
     <>
-      {/* <h2 className='header-text'>Messenger</h2> */}
-
       <form onSubmit={handleSubmit}>
         <label htmlFor='message'>Input your text: </label>
         <input
